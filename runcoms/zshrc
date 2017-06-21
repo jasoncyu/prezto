@@ -21,6 +21,14 @@ tn() {
     echo "$@"| terminal-notifier
 }
 
+# Mkdir and cd into it
+mkdircd ()
+{
+    mkdir -p -- "$1" &&
+        cd -P -- "$1"
+}
+alias mc="mkdircd"
+
 # Emacs
 # When emacs is frozen, run this to force Emacs to stop what it's doing and give control back to you.
 # One side-effect of this is that debug-on-quit is toggled, so we toggle it off immediately afterward
