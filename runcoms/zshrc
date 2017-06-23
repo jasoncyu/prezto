@@ -29,6 +29,17 @@ mkdircd ()
 }
 alias mc="mkdircd"
 
+# Get the current datetime as a UTC ISO str
+utc () {
+    date -u +"%Y-%m-%dT%H:%M:%SZ"
+}
+
+# Get the cheat.sh docs for the given command
+cheat () {
+    curl cheat.sh/"$1"
+}
+alias ch="cheat"
+
 # Emacs
 # When emacs is frozen, run this to force Emacs to stop what it's doing and give control back to you.
 # One side-effect of this is that debug-on-quit is toggled, so we toggle it off immediately afterward
@@ -45,5 +56,8 @@ big-files() {
     # Uses gsort installed from `brew install coreutils`
     du -hsx * | gsort -rh | head -10
 }
+
+# Install git-subrepo.
+source ~/.dotfiles/git-subrepo/.rc
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
