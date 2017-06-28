@@ -6,6 +6,11 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# https://github.com/robbyrussell/oh-my-zsh/issues/449
+# Stops trying to match on commands like
+# git reset HEAD^
+setopt NO_NOMATCH
+
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
