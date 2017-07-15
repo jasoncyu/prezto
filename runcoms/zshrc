@@ -66,3 +66,10 @@ big-files() {
 source ~/.dotfiles/git-subrepo/.rc
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Setting up nvm in its own function because it slows down the shell to have it
+# always active.
+setup-nvm() {
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+}
