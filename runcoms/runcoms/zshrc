@@ -13,15 +13,18 @@ fi
 
 # Customize to your needs...
 
-# Update the shell to the current setup.
-alias upenv="exec zsh"
+# * terminal-notifier
 # Workaround to make this work with tmux.
 alias terminal-notifier='reattach-to-user-namespace terminal-notifier'
 tn() {
     echo "$@"| terminal-notifier
 }
+# Notify that we're done
+tnd() {
+    echo "done" | terminal-notifier
+}
 
-# Emacs
+# * Emacs
 # When emacs is frozen, run this to force Emacs to stop what it's doing and give control back to you.
 # One side-effect of this is that debug-on-quit is toggled, so we toggle it off immediately afterward
 unfreeze-emacs() {
@@ -32,10 +35,29 @@ unfreeze-emacs() {
     emacsclient --eval "(progn (toggle-debug-on-quit))"
 }
 
+alias mux=tmuxinator
+
+# * Utilities
 # Output the biggest 10 files in human readable form.
 big-files() {
     # Uses gsort installed from `brew install coreutils`
     du -hsx * | gsort -rh | head -10
 }
 
+self-signed-certificates() {
+    # Needs OpenSSL installed. Generates key/cert pairs for use
+    openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365
+}
+
+# Update the shell to the current setup.
+alias upenv="exec zsh"
+
+# Share files with transfer.sh
+transfer() { if [ $# -eq 0 ]; then echo "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi
+             tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; }
+
+
+
+# * End of config
+# Stuff to put at the very end of the zsh file.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
