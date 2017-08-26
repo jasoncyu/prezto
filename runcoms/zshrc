@@ -18,14 +18,18 @@ fi
 
 # Customize to your needs...
 
-# Update the shell to the current setup.
-alias upenv="exec zsh"
+# * terminal-notifier
 # Workaround to make this work with tmux.
 alias terminal-notifier='reattach-to-user-namespace terminal-notifier'
 tn() {
     echo "$@"| terminal-notifier
 }
+# Notify that we're done
+tnd() {
+    echo "done" | terminal-notifier
+}
 
+# * Utilities
 # Mkdir and cd into it
 mkdircd ()
 {
@@ -45,7 +49,19 @@ cheat () {
 }
 alias ch="cheat"
 
-# Emacs
+# Output the biggest 10 files in human readable form.
+big-files() {
+    # Uses gsort installed from `brew install coreutils`
+    du -hsx * | gsort -rh | head -10
+}
+
+self-signed-certificates() {
+    # Needs OpenSSL installed. Generates key/cert pairs for use
+    openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365
+}
+
+
+# * Emacs
 # When emacs is frozen, run this to force Emacs to stop what it's doing and give control back to you.
 # One side-effect of this is that debug-on-quit is toggled, so we toggle it off immediately afterward
 unfreeze-emacs() {
@@ -54,12 +70,6 @@ unfreeze-emacs() {
 
     # Undo `debug-on-quit`
     emacsclient --eval "(progn (toggle-debug-on-quit))"
-}
-
-# Output the biggest 10 files in human readable form.
-big-files() {
-    # Uses gsort installed from `brew install coreutils`
-    du -hsx * | gsort -rh | head -10
 }
 
 # Install git-subrepo.
