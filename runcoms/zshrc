@@ -17,10 +17,11 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
-
+# * Look-and-feel
+. /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 # * terminal-notifier
 # Workaround to make this work with tmux.
-# alias terminal-notifier='reattach-to-user-namespace terminal-notifier'
+alias terminal-notifier='reattach-to-user-namespace terminal-notifier'
 tn() {
     echo "$@"| terminal-notifier
 }
@@ -59,7 +60,6 @@ self-signed-certificates() {
     # Needs OpenSSL installed. Generates key/cert pairs for use
     openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365
 }
-
 
 # * Emacs
 # When emacs is frozen, run this to force Emacs to stop what it's doing and give control back to you.
@@ -102,5 +102,6 @@ ftpane() {
             tmux select-window -t $target_window
     fi
 }
-
-. /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+# * Tmux
+alias mux='tmuxinator'
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
