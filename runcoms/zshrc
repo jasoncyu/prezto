@@ -20,7 +20,7 @@ fi
 
 # * terminal-notifier
 # Workaround to make this work with tmux.
-alias terminal-notifier='reattach-to-user-namespace terminal-notifier'
+# alias terminal-notifier='reattach-to-user-namespace terminal-notifier'
 tn() {
     echo "$@"| terminal-notifier
 }
