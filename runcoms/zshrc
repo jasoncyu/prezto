@@ -16,8 +16,22 @@ setopt NO_NOMATCH
 # docs: https://github.com/bhilburn/powerlevel9k/blob/master/README.md#available-prompt-segments
 # vcs: Git stuff slows down terminal redisplay, might add this back once its faster
 # Install and use one of the nerd fonts: https://github.com/ryanoasis/nerd-fonts/releases/tag/v1.1.0
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon context dir nvm virtualenv)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time status root_indicator background_jobs history time)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+    # os_icon
+    # context
+    dir
+    # vcs
+)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
+    nvm
+    virtualenv
+    command_execution_time
+    status
+    root_indicator
+    background_jobs
+    history
+    time
+)
 POWERLEVEL9K_MODE='nerdfont-complete'
 
 # Source Prezto.
